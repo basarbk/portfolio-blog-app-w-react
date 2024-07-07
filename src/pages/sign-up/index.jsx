@@ -1,25 +1,8 @@
-import { useState } from "react";
+import { useSignUp } from "./useSignUp";
 
 export function SignUp() {
-  const [email, setEmail] = useState();
-  const [apiProgress, setApiProgress] = useState(false);
-  const [successMessage, setSuccessMessage] = useState();
-
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    setApiProgress(true);
-    setSuccessMessage();
-    const response = await fetch("/api/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email }),
-    });
-    const body = await response.json();
-    setSuccessMessage(body.message);
-    setApiProgress(false);
-  };
+  const { apiProgress, disabled, onChangeEmail, onSubmit, successMessage } =
+    useSignUp();
 
   return (
     <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
@@ -36,7 +19,7 @@ export function SignUp() {
               id="email"
               className="form-control"
               autoComplete="off"
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={onChangeEmail}
             />
           </div>
           {successMessage && (
@@ -47,7 +30,7 @@ export function SignUp() {
           <div className="text-center">
             <button
               className="btn btn-primary"
-              disabled={!email || apiProgress}
+              disabled={disabled || apiProgress}
             >
               {apiProgress && (
                 <span
