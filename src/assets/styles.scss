@@ -1,0 +1,22 @@
+$primary: #cb095a;
+$input-border-color: var(--bs-black);
+@import "node_modules/bootstrap/scss/bootstrap";
+
+.card {
+    border: 1px solid black;
+    box-shadow: 2px 2px black;
+}
+
+.btn {
+    box-shadow: 3px 3px black;
+    transform: translate(-3px, -3px);
+    transition: unset;
+    &:active{
+        box-shadow: 1px 1px black;
+        transform: translate(-1px, -1px);
+    }
+    &:disabled {
+        box-shadow: unset;
+        transform: unset;
+    }
+}
