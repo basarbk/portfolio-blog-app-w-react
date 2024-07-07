@@ -2,16 +2,23 @@ import { useState } from "react";
 
 export function SignUp() {
   const [email, setEmail] = useState();
+  const [apiProgress, setApiProgress] = useState(false);
+  const [successMessage, setSuccessMessage] = useState();
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    fetch("/api/users", {
+    setApiProgress(true);
+    setSuccessMessage();
+    const response = await fetch("/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email }),
     });
+    const body = await response.json();
+    setSuccessMessage(body.message);
+    setApiProgress(false);
   };
 
   return (
@@ -32,8 +39,22 @@ export function SignUp() {
               onChange={(event) => setEmail(event.target.value)}
             />
           </div>
+          {successMessage && (
+            <div className="alert alert-success" role="alert">
+              {successMessage}
+            </div>
+          )}
           <div className="text-center">
-            <button className="btn btn-primary" disabled={!email}>
+            <button
+              className="btn btn-primary"
+              disabled={!email || apiProgress}
+            >
+              {apiProgress && (
+                <span
+                  className="spinner-border spinner-border-sm"
+                  aria-hidden="true"
+                ></span>
+              )}
               Sign Up
             </button>
           </div>
