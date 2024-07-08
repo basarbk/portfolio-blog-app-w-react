@@ -1,9 +1,9 @@
-import { SignUp } from "./pages/sign-up";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <div className="container">
-      <SignUp />
+      <Outlet />
     </div>
   );
 }
