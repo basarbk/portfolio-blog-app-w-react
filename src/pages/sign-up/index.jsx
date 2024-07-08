@@ -8,6 +8,7 @@ export function SignUp() {
     onSubmit,
     successMessage,
     errorMessage,
+    errors,
   } = useSignUp();
 
   return (
@@ -27,6 +28,7 @@ export function SignUp() {
               autoComplete="off"
               onChange={onChangeEmail}
             />
+            <div className="small text-danger">{errors.email}</div>
           </div>
           {successMessage && (
             <div className="alert alert-success" role="alert">

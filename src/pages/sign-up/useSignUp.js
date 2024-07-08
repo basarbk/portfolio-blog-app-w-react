@@ -5,9 +5,11 @@ export function useSignUp() {
   const [apiProgress, setApiProgress] = useState(false);
   const [successMessage, setSuccessMessage] = useState();
   const [errorMessage, setErrorMessage] = useState();
+  const [errors, setErrors] = useState({});
 
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
+    setErrors({});
   };
 
   const onSubmit = useCallback(
@@ -25,7 +27,11 @@ export function useSignUp() {
           body: JSON.stringify({ email }),
         });
         const body = await response.json();
-        setSuccessMessage(body.message);
+        if (response.ok) {
+          setSuccessMessage(body.message);
+        } else if (response.status === 400) {
+          setErrors(body.validationErrors);
+        }
       } catch {
         setErrorMessage("Unexpected error occurred, please try again");
       } finally {
@@ -40,6 +46,7 @@ export function useSignUp() {
     disabled: !email,
     successMessage,
     errorMessage,
+    errors,
     onSubmit,
     onChangeEmail,
   };
