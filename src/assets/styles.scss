@@ -20,3 +20,14 @@ $input-border-color: var(--bs-black);
         transform: unset;
     }
 }
+
+.navbar {
+    border-bottom: 3px solid black;
+}
+
+.navbar a {
+    &:hover {
+        text-shadow: 2px 2px black;
+        transform: translate(-2px, -2px);
+    }
+}
