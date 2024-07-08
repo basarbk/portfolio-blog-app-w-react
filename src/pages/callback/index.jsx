@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { AppAlert } from "../../components";
+import { AppAlert, AppSpinner } from "../../components";
 
 export function Callback() {
   const [searchParams] = useSearchParams();
@@ -42,10 +42,7 @@ export function Callback() {
   return (
     <div>
       {status === "loading" ? (
-        <span
-          className="spinner-border spinner-border-sm"
-          aria-hidden="true"
-        ></span>
+        <AppSpinner size="regular" full />
       ) : (
         <AppAlert variant={status === "fail" ? "danger" : "success"}>
           {message}

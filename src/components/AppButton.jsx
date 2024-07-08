@@ -1,3 +1,5 @@
+import { AppSpinner } from "./AppSpinner";
+
 export function AppButton(props) {
   const { disabled, loading, children, variant } = props;
   return (
@@ -5,12 +7,7 @@ export function AppButton(props) {
       className={`btn btn-${variant ?? "primary"}`}
       disabled={disabled || loading}
     >
-      {loading && (
-        <span
-          className="spinner-border spinner-border-sm"
-          aria-hidden="true"
-        ></span>
-      )}
+      {loading && <AppSpinner />}
       {children}
     </button>
   );
