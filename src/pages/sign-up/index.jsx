@@ -1,3 +1,4 @@
+import { AppAlert, AppButton, AppInput } from "../../components";
 import { useSignUp } from "./useSignUp";
 
 export function SignUp() {
@@ -18,42 +19,19 @@ export function SignUp() {
           <h1>Sign Up</h1>
         </div>
         <div className="card-body">
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              E-mail
-            </label>
-            <input
-              id="email"
-              className="form-control"
-              autoComplete="off"
-              onChange={onChangeEmail}
-              type="email"
-            />
-            <div className="small text-danger">{errors.email}</div>
-          </div>
-          {successMessage && (
-            <div className="alert alert-success" role="alert">
-              {successMessage}
-            </div>
-          )}
-          {errorMessage && (
-            <div className="alert alert-danger" role="alert">
-              {errorMessage}
-            </div>
-          )}
+          <AppInput
+            id="email"
+            label="E-mail"
+            onChange={onChangeEmail}
+            type="email"
+            help={errors.email}
+          />
+          <AppAlert>{successMessage}</AppAlert>
+          <AppAlert variant="danger">{errorMessage}</AppAlert>
           <div className="text-center">
-            <button
-              className="btn btn-primary"
-              disabled={disabled || apiProgress}
-            >
-              {apiProgress && (
-                <span
-                  className="spinner-border spinner-border-sm"
-                  aria-hidden="true"
-                ></span>
-              )}
+            <AppButton disabled={disabled} loading={apiProgress}>
               Sign Up
-            </button>
+            </AppButton>
           </div>
         </div>
       </form>
