@@ -1,8 +1,14 @@
 import { useSignUp } from "./useSignUp";
 
 export function SignUp() {
-  const { apiProgress, disabled, onChangeEmail, onSubmit, successMessage } =
-    useSignUp();
+  const {
+    apiProgress,
+    disabled,
+    onChangeEmail,
+    onSubmit,
+    successMessage,
+    errorMessage,
+  } = useSignUp();
 
   return (
     <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
@@ -25,6 +31,11 @@ export function SignUp() {
           {successMessage && (
             <div className="alert alert-success" role="alert">
               {successMessage}
+            </div>
+          )}
+          {errorMessage && (
+            <div className="alert alert-danger" role="alert">
+              {errorMessage}
             </div>
           )}
           <div className="text-center">

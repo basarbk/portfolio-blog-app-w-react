@@ -4,6 +4,7 @@ export function useSignUp() {
   const [email, setEmail] = useState();
   const [apiProgress, setApiProgress] = useState(false);
   const [successMessage, setSuccessMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState();
 
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -14,16 +15,22 @@ export function useSignUp() {
       event.preventDefault();
       setApiProgress(true);
       setSuccessMessage();
-      const response = await fetch("/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-      const body = await response.json();
-      setSuccessMessage(body.message);
-      setApiProgress(false);
+      setErrorMessage();
+      try {
+        const response = await fetch("/api/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        });
+        const body = await response.json();
+        setSuccessMessage(body.message);
+      } catch {
+        setErrorMessage("Unexpected error occurred, please try again");
+      } finally {
+        setApiProgress(false);
+      }
     },
     [email]
   );
@@ -32,6 +39,7 @@ export function useSignUp() {
     apiProgress,
     disabled: !email,
     successMessage,
+    errorMessage,
     onSubmit,
     onChangeEmail,
   };
