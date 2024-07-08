@@ -13,7 +13,7 @@ export function SignUp() {
 
   return (
     <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
-      <form className="card" onSubmit={onSubmit}>
+      <form className="card" onSubmit={onSubmit} noValidate>
         <div className="card-header text-center">
           <h1>Sign Up</h1>
         </div>
@@ -27,6 +27,7 @@ export function SignUp() {
               className="form-control"
               autoComplete="off"
               onChange={onChangeEmail}
+              type="email"
             />
             <div className="small text-danger">{errors.email}</div>
           </div>

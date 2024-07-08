@@ -15,9 +15,15 @@ export function useSignUp() {
   const onSubmit = useCallback(
     async (event) => {
       event.preventDefault();
-      setApiProgress(true);
       setSuccessMessage();
       setErrorMessage();
+      const form = event.target;
+      if (!form.checkValidity()) {
+        setErrors({ email: "Invalid email" });
+        return;
+      }
+
+      setApiProgress(true);
       try {
         const response = await fetch("/api/users", {
           method: "POST",
