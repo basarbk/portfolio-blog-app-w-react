@@ -1,4 +1,7 @@
-export function Editor({ setTitle, setContent }) {
+import { useEditorMutator } from "../context/editorContext";
+
+export function Editor() {
+  const { setTitle, setContent } = useEditorMutator();
   return (
     <div className="bg-white d-flex flex-column p-3 border rounded flex-grow-1">
       <textarea
