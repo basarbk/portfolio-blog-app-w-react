@@ -4,6 +4,7 @@ import { Callback } from "./callback";
 import App from "../App";
 import { Home } from "./home";
 import { Login } from "./login";
+import { ArticleEditor } from "./article";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         Component: Login,
+      },
+      {
+        path: "/article/new",
+        Component: ArticleEditor,
       },
     ],
   },

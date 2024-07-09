@@ -12,7 +12,16 @@ export function NavBar() {
           My App
         </Link>
         <ul className="navbar-nav">
-          {auth.id !== 0 && <Logout />}
+          {auth.id !== 0 && (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link active" to="/article/new">
+                  Post Article
+                </Link>
+              </li>
+              <Logout />
+            </>
+          )}
           {auth.id === 0 && (
             <>
               <li className="nav-item">
