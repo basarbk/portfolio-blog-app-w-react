@@ -39,3 +39,17 @@ $input-border-color: var(--bs-black);
         transform: translate(-2px, -2px);
     }
 }
+
+.editor-base {
+    height: calc(100vh - 75px);
+}
+
+.no-outline {
+    &:focus {
+        outline: none;
+    }
+}
+
+.no-resize {
+    resize: none;
+}
