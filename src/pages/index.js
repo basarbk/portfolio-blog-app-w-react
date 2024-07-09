@@ -3,6 +3,7 @@ import { SignUp } from "./sign-up";
 import { Callback } from "./callback";
 import App from "../App";
 import { Home } from "./home";
+import { Login } from "./login";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: "/callback",
         Component: Callback,
+      },
+      {
+        path: "/login",
+        Component: Login,
       },
     ],
   },

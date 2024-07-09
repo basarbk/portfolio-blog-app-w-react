@@ -14,11 +14,18 @@ export function NavBar() {
         <ul className="navbar-nav">
           {auth.id !== 0 && <Logout />}
           {auth.id === 0 && (
-            <li className="nav-item">
-              <Link className="nav-link active" to="/signup">
-                Sign Up
-              </Link>
-            </li>
+            <>
+              <li className="nav-item">
+                <Link className="nav-link active" to="/login">
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link active" to="/signup">
+                  Sign Up
+                </Link>
+              </li>
+            </>
           )}
         </ul>
       </div>
