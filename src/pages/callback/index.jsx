@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AppAlert, AppSpinner } from "../../components";
+import { useAuth } from "../../context/authContext";
 
 export function Callback() {
   const [searchParams] = useSearchParams();
 
   const [status, setStatus] = useState("loading");
   const [message, setMessage] = useState();
+  const { setLoggedIn } = useAuth();
 
   useEffect(() => {
     async function sendRequest() {
@@ -26,6 +28,7 @@ export function Callback() {
         if (result.ok) {
           setStatus("success");
           setMessage("Account is created");
+          setLoggedIn(body);
         } else {
           setStatus("fail");
           setMessage(body.message);
@@ -37,7 +40,7 @@ export function Callback() {
     }
 
     sendRequest();
-  }, [searchParams]);
+  }, [searchParams, setLoggedIn]);
 
   return (
     <div>
