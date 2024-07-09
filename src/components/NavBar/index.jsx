@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
+import { Logout } from "./components/Logout";
 
 export function NavBar() {
   const { auth } = useAuth();
@@ -11,11 +12,7 @@ export function NavBar() {
           My App
         </Link>
         <ul className="navbar-nav">
-          {auth.id !== 0 && (
-            <li className="nav-item">
-              <span className="nav-link active">Logout</span>
-            </li>
-          )}
+          {auth.id !== 0 && <Logout />}
           {auth.id === 0 && (
             <li className="nav-item">
               <Link className="nav-link active" to="/signup">

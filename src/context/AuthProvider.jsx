@@ -17,12 +17,16 @@ export function AuthProvider(props) {
     setAuth(data);
   }, []);
 
+  const setLoggedOut = useCallback(() => {
+    setAuth({ id: 0 });
+  }, []);
+
   useEffect(() => {
     localStorage.setItem("auth", JSON.stringify(auth));
   }, [auth]);
 
   return (
-    <AuthContext.Provider value={{ auth, setLoggedIn }}>
+    <AuthContext.Provider value={{ auth, setLoggedIn, setLoggedOut }}>
       {props.children}
     </AuthContext.Provider>
   );

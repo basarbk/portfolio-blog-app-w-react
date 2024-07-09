@@ -31,3 +31,11 @@ $input-border-color: var(--bs-black);
         transform: translate(-2px, -2px);
     }
 }
+
+.nav-item span {
+    &:hover {
+        cursor: pointer;
+        text-shadow: 2px 2px black;
+        transform: translate(-2px, -2px);
+    }
+}
