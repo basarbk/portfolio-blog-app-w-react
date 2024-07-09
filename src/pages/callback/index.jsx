@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { AppAlert, AppSpinner } from "../../components";
 import { useAuth } from "../../context/authContext";
 
@@ -9,6 +9,7 @@ export function Callback() {
   const [status, setStatus] = useState("loading");
   const [message, setMessage] = useState();
   const { setLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function sendRequest() {
@@ -26,6 +27,9 @@ export function Callback() {
         });
         const body = await result.json();
         if (result.ok) {
+          if (searchParams.get("operation") === "login") {
+            navigate("/");
+          }
           setStatus("success");
           setMessage("Account is created");
           setLoggedIn(body);
@@ -40,7 +44,7 @@ export function Callback() {
     }
 
     sendRequest();
-  }, [searchParams, setLoggedIn]);
+  }, [searchParams, setLoggedIn, navigate]);
 
   return (
     <div>
