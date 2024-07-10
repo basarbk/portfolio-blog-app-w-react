@@ -5,7 +5,7 @@ import { EditorContextProvider } from "./context/EditContextProvider";
 import { useSubmit } from "./hooks/useSubmit";
 
 function ArticleEditorInner() {
-  const { saveArticle, saveButtonText } = useSubmit();
+  const { saveArticle, saveButtonText, apiProgress } = useSubmit();
 
   return (
     <form onSubmit={saveArticle}>
@@ -13,7 +13,7 @@ function ArticleEditorInner() {
         <Editor />
         <div className="d-flex gap-2 py-3 px-2">
           <PublishButtonWrapper />
-          <AppButton type="submit" variant="success">
+          <AppButton type="submit" variant="success" loading={apiProgress}>
             {saveButtonText}
           </AppButton>
         </div>
