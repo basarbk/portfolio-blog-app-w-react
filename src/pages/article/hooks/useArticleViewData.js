@@ -29,9 +29,21 @@ export function useArticleViewData() {
     sendRequest();
   }, [params.idOrSlug]);
 
+  const setPublished = (published) => {
+    const publishedAt = published ? new Date() : null;
+    setData((previousData) => {
+      return {
+        ...previousData,
+        published,
+        publishedAt,
+      };
+    });
+  };
+
   return {
     status,
     message,
     data,
+    setPublished,
   };
 }

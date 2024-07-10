@@ -1,5 +1,6 @@
 import { AppButton, AppToast } from "../../../components";
 import { Editor } from "./components/Editor";
+import { PreviewButton } from "./components/PreviewButton";
 import { PublishButtonWrapper } from "./components/PublishButtonWrapper";
 import { EditorContextProvider } from "./context/EditContextProvider";
 import { useEditorData } from "./context/editorContext";
@@ -19,6 +20,7 @@ function ArticleEditorInner() {
             <AppButton type="submit" variant="success" loading={apiProgress}>
               {saveButtonText}
             </AppButton>
+            <PreviewButton />
           </div>
         </div>
       </form>

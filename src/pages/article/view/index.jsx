@@ -4,7 +4,7 @@ import { MoreArticles } from "./components/MoreArticles";
 import { Actions } from "./components/Actions";
 
 export function ArticleView() {
-  const { data, status, message } = useArticleViewData();
+  const { data, status, message, setPublished } = useArticleViewData();
 
   if (status === "loading") return <AppSpinner size="regular" full />;
 
@@ -22,7 +22,7 @@ export function ArticleView() {
                 publishedAt={data.publishedAt}
               />
             </div>
-            <Actions article={data} />
+            <Actions article={data} setPublished={setPublished} />
           </div>
           <div>
             <h1 className="text-capitalize">{data.title}</h1>
