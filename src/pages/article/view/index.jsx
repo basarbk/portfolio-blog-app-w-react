@@ -1,6 +1,7 @@
-import { useArticleViewData } from "./useArticleViewData";
+import { useArticleViewData } from "../hooks/useArticleViewData";
 import { AppAlert, AppSpinner, ArticleInfo } from "../../../components";
 import { MoreArticles } from "./components/MoreArticles";
+import { Actions } from "./components/Actions";
 
 export function ArticleView() {
   const { data, status, message } = useArticleViewData();
@@ -14,7 +15,15 @@ export function ArticleView() {
     <div className="row">
       <div className="col-lg-8">
         <main className="bg-white border rounded py-3 px-5">
-          <ArticleInfo author={data.author} publishedAt={data.publishedAt} />
+          <div className="d-lg-flex align-items-center">
+            <div className="flex-grow-1">
+              <ArticleInfo
+                author={data.author}
+                publishedAt={data.publishedAt}
+              />
+            </div>
+            <Actions article={data} />
+          </div>
           <div>
             <h1 className="text-capitalize">{data.title}</h1>
           </div>

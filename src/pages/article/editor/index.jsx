@@ -27,9 +27,9 @@ function ArticleEditorInner() {
   );
 }
 
-export function ArticleEditor() {
+export function ArticleEditor({ article }) {
   return (
-    <EditorContextProvider>
+    <EditorContextProvider init={article}>
       <ArticleEditorInner />
     </EditorContextProvider>
   );

@@ -4,7 +4,7 @@ import { Callback } from "./callback";
 import App from "../App";
 import { Home } from "./home";
 import { Login } from "./login";
-import { ArticleEditor, ArticleView } from "./article";
+import { ArticleEdit, ArticleEditor, ArticleView } from "./article";
 import { User } from "./user";
 
 export const router = createBrowserRouter([
@@ -36,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "/:handle/:idOrSlug",
         Component: ArticleView,
+      },
+      {
+        path: "/:handle/:idOrSlug/edit",
+        Component: ArticleEdit,
       },
       {
         path: "/:handle",

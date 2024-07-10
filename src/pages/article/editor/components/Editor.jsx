@@ -1,7 +1,7 @@
 import { useEditorData, useEditorMutator } from "../context/editorContext";
 
 export function Editor() {
-  const { errors } = useEditorData();
+  const { errors, title, content } = useEditorData();
   const { setTitle, setContent } = useEditorMutator();
   return (
     <div className="bg-white d-flex flex-column p-3 border rounded flex-grow-1">
@@ -11,6 +11,7 @@ export function Editor() {
         rows="1"
         required
         onChange={(event) => setTitle(event.target.value)}
+        defaultValue={title}
       />
       <span className="small text-danger">{errors.title}</span>
       <textarea
@@ -18,6 +19,7 @@ export function Editor() {
         placeholder="Write your post content here"
         required
         onChange={(event) => setContent(event.target.value)}
+        defaultValue={content}
       />
       <span className="small text-danger">{errors.content}</span>
     </div>

@@ -47,14 +47,23 @@ const editorReducer = (editorState, action) => {
 };
 
 export function EditorContextProvider(props) {
-  const [editorData, dispatch] = useReducer(editorReducer, {
+  let initialData = {
     title: "",
     content: "",
     id: "",
     published: false,
     errors: {},
     error: "",
-  });
+  };
+
+  if (props.init) {
+    initialData = {
+      ...initialData,
+      ...props.init,
+    };
+  }
+
+  const [editorData, dispatch] = useReducer(editorReducer, initialData);
 
   return (
     <EditorContext.Provider value={{ ...editorData }}>
