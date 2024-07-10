@@ -8,7 +8,7 @@ function ArticleEditorInner() {
   const { saveArticle, saveButtonText, apiProgress } = useSubmit();
 
   return (
-    <form onSubmit={saveArticle}>
+    <form onSubmit={saveArticle} noValidate>
       <div className="d-flex flex-column editor-base">
         <Editor />
         <div className="d-flex gap-2 py-3 px-2">

@@ -7,11 +7,19 @@ const editorReducer = (editorState, action) => {
       return {
         ...editorState,
         title: action.data,
+        errors: {
+          ...editorState.errors,
+          title: "",
+        },
       };
     case "content":
       return {
         ...editorState,
         content: action.data,
+        errors: {
+          ...editorState.errors,
+          content: "",
+        },
       };
     case "id":
       return {
@@ -22,6 +30,11 @@ const editorReducer = (editorState, action) => {
       return {
         ...editorState,
         published: action.data,
+      };
+    case "errors":
+      return {
+        ...editorState,
+        errors: action.data,
       };
     default:
       throw new Error(`Unknown action: ${action.type}`);
@@ -34,6 +47,7 @@ export function EditorContextProvider(props) {
     content: "",
     id: "",
     published: false,
+    errors: {},
   });
 
   return (
@@ -44,6 +58,7 @@ export function EditorContextProvider(props) {
           setContent: (data) => dispatch({ type: "content", data }),
           setId: (data) => dispatch({ type: "id", data }),
           setPublished: (data) => dispatch({ type: "published", data }),
+          setErrors: (data) => dispatch({ type: "errors", data }),
         }}
       >
         {props.children}
