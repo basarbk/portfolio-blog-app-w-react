@@ -18,6 +18,11 @@ const editorReducer = (editorState, action) => {
         ...editorState,
         id: action.data,
       };
+    case "published":
+      return {
+        ...editorState,
+        published: action.data,
+      };
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }
@@ -28,6 +33,7 @@ export function EditorContextProvider(props) {
     title: "",
     content: "",
     id: "",
+    published: false,
   });
 
   return (
@@ -37,6 +43,7 @@ export function EditorContextProvider(props) {
           setTitle: (data) => dispatch({ type: "title", data }),
           setContent: (data) => dispatch({ type: "content", data }),
           setId: (data) => dispatch({ type: "id", data }),
+          setPublished: (data) => dispatch({ type: "published", data }),
         }}
       >
         {props.children}
