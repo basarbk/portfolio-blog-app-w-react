@@ -2,6 +2,8 @@ import { useArticleViewData } from "../hooks/useArticleViewData";
 import { AppAlert, AppSpinner, ArticleInfo } from "../../../components";
 import { MoreArticles } from "./components/MoreArticles";
 import { Actions } from "./components/Actions";
+import marked from "./util/markdownParser";
+import "highlight.js/styles/atom-one-light.min.css";
 
 export function ArticleView() {
   const { data, status, message, setPublished } = useArticleViewData();
@@ -27,7 +29,9 @@ export function ArticleView() {
           <div>
             <h1 className="text-capitalize">{data.title}</h1>
           </div>
-          {data.content}
+          <div
+            dangerouslySetInnerHTML={{ __html: marked.parse(data.content) }}
+          ></div>
         </main>
       </div>
       <div className="col-lg-4">
