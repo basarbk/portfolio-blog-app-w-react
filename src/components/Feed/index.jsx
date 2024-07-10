@@ -1,18 +1,23 @@
 import { useEffect, useState } from "react";
 import { AppButton } from "../AppButton";
 import { ArticleCard } from "./components/ArticleCard";
-export function Feed() {
+
+export function Feed(props) {
   const [data, setData] = useState({ content: [], page: 0, size: 5, total: 0 });
 
   useEffect(() => {
+    setData({ content: [], page: 0, size: 5, total: 0 });
     loadPageData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.handle]);
 
   const loadPageData = async (pageIndex = 0) => {
+    const url = props.handle
+      ? `/api/users/${props.handle}/articles?`
+      : "/api/articles?";
     const result = await fetch(
-      "/api/articles?" +
+      url +
         new URLSearchParams({
           page: pageIndex,
           size: data.size,
