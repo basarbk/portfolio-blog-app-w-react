@@ -1,18 +1,26 @@
 import { useState } from "react";
 import { AppButton } from "../../../components";
 
-export function PublishButton({ id, published, setPublished }) {
+export function PublishButton({ id, published, setPublished, setError }) {
   const [apiProgress, setApiProgress] = useState(false);
   const toggle = async () => {
+    setError();
     setApiProgress(true);
-    const result = await fetch(`/api/articles/${id}/publish`, {
-      method: "PATCH",
-    });
-    if (result.ok) {
+    try {
+      const result = await fetch(`/api/articles/${id}/publish`, {
+        method: "PATCH",
+      });
       const body = await result.json();
-      setPublished(body.published);
+      if (result.ok) {
+        setPublished(body.published);
+      } else {
+        setError(body.message);
+      }
+    } catch {
+      setError("Unexpected error occurred, please try again");
+    } finally {
+      setApiProgress(false);
     }
-    setApiProgress(false);
   };
 
   if (!id) return null;

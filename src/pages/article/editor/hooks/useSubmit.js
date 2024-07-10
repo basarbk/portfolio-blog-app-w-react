@@ -3,7 +3,7 @@ import { useEditorData, useEditorMutator } from "../context/editorContext";
 
 export function useSubmit() {
   const { id, title, content } = useEditorData();
-  const { setId, setErrors } = useEditorMutator();
+  const { setId, setErrors, setError } = useEditorMutator();
   const [apiProgress, setApiProgress] = useState(false);
 
   const saveArticle = async (event) => {
@@ -26,23 +26,30 @@ export function useSubmit() {
       setErrors(errors);
       return;
     }
-
+    setError();
     setApiProgress(true);
     const url = id ? `/api/articles/${id}` : "/api/articles";
-    const response = await fetch(url, {
-      method: id ? "PUT" : "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ title, content }),
-    });
-    const body = await response.json();
-    if (response.ok) {
-      setId(body.id);
-    } else if (response.status === 400) {
-      setErrors(body.validationErrors);
+    try {
+      const response = await fetch(url, {
+        method: id ? "PUT" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, content }),
+      });
+      const body = await response.json();
+      if (response.ok) {
+        setId(body.id);
+      } else if (response.status === 400) {
+        setErrors(body.validationErrors);
+      } else {
+        setError(body.message);
+      }
+    } catch {
+      setError("Unexpected error occurred, please try again");
+    } finally {
+      setApiProgress(false);
     }
-    setApiProgress(false);
   };
 
   return {
