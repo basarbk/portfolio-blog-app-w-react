@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AppButton } from "../AppButton";
-import { Link } from "react-router-dom";
+import { ArticleCard } from "./components/ArticleCard";
 export function Feed() {
   const [data, setData] = useState({ content: [], page: 0, size: 5, total: 0 });
 
@@ -32,20 +32,9 @@ export function Feed() {
   return (
     <>
       <div>
-        {data.content.map((article) => {
-          return (
-            <div className="card mb-3" key={article.id}>
-              <div className="card-body">
-                <Link
-                  className="text-decoration-none text-dark fs-3"
-                  to={`/${article.author.handle}/${article.slug}`}
-                >
-                  {article.title}
-                </Link>
-              </div>
-            </div>
-          );
-        })}
+        {data.content.map((article) => (
+          <ArticleCard article={article} key={article.id} />
+        ))}
       </div>
       {data.page < data.total - 1 && (
         <AppButton

@@ -1,5 +1,5 @@
 import { useArticleViewData } from "./useArticleViewData";
-import { AppAlert, AppSpinner } from "../../../components";
+import { AppAlert, AppSpinner, ArticleInfo } from "../../../components";
 
 export function ArticleView() {
   const { data, status, message } = useArticleViewData();
@@ -11,6 +11,7 @@ export function ArticleView() {
   }
   return (
     <main className="bg-white border rounded py-3 px-5">
+      <ArticleInfo author={data.author} publishedAt={data.publishedAt} />
       <div>
         <h1 className="text-capitalize">{data.title}</h1>
       </div>
