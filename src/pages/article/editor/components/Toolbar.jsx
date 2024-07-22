@@ -1,4 +1,6 @@
+import { useRef } from "react";
 import { useEditorMutator } from "../context/editorContext";
+import { fileUpload } from "../../../../shared/fileUpload";
 
 const actions = [
   {
@@ -20,6 +22,8 @@ const actions = [
 ];
 
 export function Toolbar(props) {
+  const fileInputRef = useRef();
+
   const { setContent } = useEditorMutator();
   const onClick = (syntax) => {
     const contentTextArea = props.contentRef.current;
@@ -31,6 +35,18 @@ export function Toolbar(props) {
     contentTextArea.setRangeText(selectedText, start, end);
     setContent(contentTextArea.value);
   };
+
+  const onSelectImage = async (event) => {
+    const file = event.target.files[0];
+    const result = await fileUpload(file);
+    if (result.status === "success") {
+      const contentTextArea = props.contentRef.current;
+      const imageText = `\n![image alt text](/api/assets/${result.data})`;
+      contentTextArea.setRangeText(imageText);
+      setContent(contentTextArea.value);
+    }
+  };
+
   return (
     <div className="bg-dark-subtle gap-2 d-flex p-2 rounded border">
       {actions.map((action) => (
@@ -43,6 +59,14 @@ export function Toolbar(props) {
           <span className="material-symbols-outlined">{action.icon}</span>
         </button>
       ))}
+      <button
+        className="btn btn-outline-dark btn-sm icon-link"
+        type="button"
+        onClick={() => fileInputRef.current.click()}
+      >
+        <span className="material-symbols-outlined">image</span>
+        <input type="file" hidden ref={fileInputRef} onChange={onSelectImage} />
+      </button>
     </div>
   );
 }
