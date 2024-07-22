@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEditorData, useEditorMutator } from "../context/editorContext";
 
 export function useSubmit() {
-  const { id, title, content } = useEditorData();
+  const { id, title, content, image } = useEditorData();
   const { setId, setErrors, setError } = useEditorMutator();
   const [apiProgress, setApiProgress] = useState(false);
 
@@ -35,7 +35,7 @@ export function useSubmit() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, content }),
+        body: JSON.stringify({ title, content, image }),
       });
       const body = await response.json();
       if (response.ok) {

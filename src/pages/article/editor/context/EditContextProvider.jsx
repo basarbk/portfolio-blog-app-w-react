@@ -41,6 +41,11 @@ const editorReducer = (editorState, action) => {
         ...editorState,
         error: action.data,
       };
+    case "image":
+      return {
+        ...editorState,
+        image: action.data,
+      };
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }
@@ -54,6 +59,7 @@ export function EditorContextProvider(props) {
     published: false,
     errors: {},
     error: "",
+    image: null,
   };
 
   if (props.init) {
@@ -75,6 +81,7 @@ export function EditorContextProvider(props) {
           setPublished: (data) => dispatch({ type: "published", data }),
           setErrors: (data) => dispatch({ type: "errors", data }),
           setError: (data) => dispatch({ type: "error", data }),
+          setImage: (data) => dispatch({ type: "image", data }),
         }}
       >
         {props.children}
