@@ -24,7 +24,7 @@ const actions = [
 export function Toolbar(props) {
   const fileInputRef = useRef();
 
-  const { setContent } = useEditorMutator();
+  const { setContent, setError } = useEditorMutator();
   const onClick = (syntax) => {
     const contentTextArea = props.contentRef.current;
     const start = contentTextArea.selectionStart;
@@ -37,13 +37,18 @@ export function Toolbar(props) {
   };
 
   const onSelectImage = async (event) => {
+    setError();
     const file = event.target.files[0];
+    if (!file) return;
     const result = await fileUpload(file);
     if (result.status === "success") {
       const contentTextArea = props.contentRef.current;
       const imageText = `\n![image alt text](/api/assets/${result.data})`;
       contentTextArea.setRangeText(imageText);
       setContent(contentTextArea.value);
+    } else {
+      setError(result.data);
+      event.target.value = null;
     }
   };
 
