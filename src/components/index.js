@@ -7,3 +7,4 @@ export * from "./AppToast";
 export * from "./Feed";
 export * from "./ArticleInfo";
 export * from "./ImageSelector";
+export * from "./AppImage";

@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
-import defaultProileImage from "../assets/profile.png";
 import { format } from "timeago.js";
+import { AppImage } from "./AppImage";
 
 export function ArticleInfo({ author, publishedAt }) {
   return (
     <div className="d-flex align-items-center gap-3 mb-1">
       <Link to={`/${author.handle}`}>
-        <img
-          src={defaultProileImage}
+        <AppImage
+          image={author.image}
           width={30}
           height={30}
+          fallback="profile"
           className="rounded-circle shadow-sm"
         />
       </Link>

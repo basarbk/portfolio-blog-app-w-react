@@ -1,5 +1,10 @@
 import { useArticleViewData } from "../hooks/useArticleViewData";
-import { AppAlert, AppSpinner, ArticleInfo } from "../../../components";
+import {
+  AppAlert,
+  AppImage,
+  AppSpinner,
+  ArticleInfo,
+} from "../../../components";
 import { MoreArticles } from "./components/MoreArticles";
 import { Actions } from "./components/Actions";
 import marked from "./util/markdownParser";
@@ -16,22 +21,29 @@ export function ArticleView() {
   return (
     <div className="row">
       <div className="col-lg-8">
-        <main className="bg-white border rounded py-3 px-5">
-          <div className="d-lg-flex align-items-center">
-            <div className="flex-grow-1">
-              <ArticleInfo
-                author={data.author}
-                publishedAt={data.publishedAt}
-              />
+        <main className="bg-white border rounded">
+          <AppImage
+            image={data.image}
+            className="w-100 rounded-top object-fit-cover"
+            height={300}
+          />
+          <div className="py-3 px-5">
+            <div className="d-lg-flex align-items-center">
+              <div className="flex-grow-1">
+                <ArticleInfo
+                  author={data.author}
+                  publishedAt={data.publishedAt}
+                />
+              </div>
+              <Actions article={data} setPublished={setPublished} />
             </div>
-            <Actions article={data} setPublished={setPublished} />
+            <div>
+              <h1 className="text-capitalize">{data.title}</h1>
+            </div>
+            <div
+              dangerouslySetInnerHTML={{ __html: marked.parse(data.content) }}
+            ></div>
           </div>
-          <div>
-            <h1 className="text-capitalize">{data.title}</h1>
-          </div>
-          <div
-            dangerouslySetInnerHTML={{ __html: marked.parse(data.content) }}
-          ></div>
         </main>
       </div>
       <div className="col-lg-4">
