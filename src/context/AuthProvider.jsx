@@ -21,12 +21,24 @@ export function AuthProvider(props) {
     setAuth({ id: 0 });
   }, []);
 
+  const userUpdated = useCallback((name, image) => {
+    setAuth((previousAuth) => {
+      return {
+        ...previousAuth,
+        name,
+        image,
+      };
+    });
+  }, []);
+
   useEffect(() => {
     localStorage.setItem("auth", JSON.stringify(auth));
   }, [auth]);
 
   return (
-    <AuthContext.Provider value={{ auth, setLoggedIn, setLoggedOut }}>
+    <AuthContext.Provider
+      value={{ auth, setLoggedIn, setLoggedOut, userUpdated }}
+    >
       {props.children}
     </AuthContext.Provider>
   );

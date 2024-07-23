@@ -6,6 +6,7 @@ import { Home } from "./home";
 import { Login } from "./login";
 import { ArticleEdit, ArticleEditor, ArticleView } from "./article";
 import { User } from "./user";
+import { Edit } from "./user/Edit";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "/:handle",
         Component: User,
+      },
+      {
+        path: "/edit",
+        Component: Edit,
       },
     ],
   },
