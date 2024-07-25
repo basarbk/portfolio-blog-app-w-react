@@ -10,7 +10,7 @@ export function Feed(props) {
     loadPageData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.handle]);
+  }, [props.handle, props.filter]);
 
   const loadPageData = async (pageIndex = 0) => {
     const url = props.handle
@@ -23,6 +23,7 @@ export function Feed(props) {
           size: data.size,
           sort: "published_at",
           direction: "desc",
+          ...(props.filter ? { reaction: props.filter } : {}),
         })
     );
     const body = await result.json();
