@@ -1,4 +1,8 @@
+import { useAuth } from "../../../context/authContext";
+
 export function Filter({ setFilter }) {
+  const { auth } = useAuth();
+  if (!auth.id) return null;
   return (
     <div className="d-flex py-3">
       <div className="flex-grow-1">

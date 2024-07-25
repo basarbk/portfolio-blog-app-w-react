@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "../context/authContext";
 
 const reactions = {
   like: {
@@ -18,8 +19,10 @@ const reactions = {
 export function ReactionButton({ entityId, reaction, details }) {
   const [reacted, setReacted] = useState(details.reacted);
   const [count, setCount] = useState(details.count);
+  const { auth } = useAuth();
 
   const onClick = async () => {
+    if (!auth.id) return;
     const response = await fetch("/api/reactions", {
       method: "POST",
       headers: {
@@ -44,7 +47,7 @@ export function ReactionButton({ entityId, reaction, details }) {
       <span
         className="material-symbols-outlined action"
         style={
-          reacted
+          auth.id > 0 && reacted
             ? {
                 fontVariationSettings: `'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24`,
                 color: reactions[reaction].color,
