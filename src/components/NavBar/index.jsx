@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import { Logout } from "./components/Logout";
+import { User } from "./components/User";
 
 export function NavBar() {
   const { auth } = useAuth();
@@ -20,6 +21,7 @@ export function NavBar() {
                 </Link>
               </li>
               <Logout />
+              <User />
             </>
           )}
           {auth.id === 0 && (
