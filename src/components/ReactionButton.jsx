@@ -15,8 +15,10 @@ const reactions = {
   },
 };
 
-export function ReactionButton({ entityId, reaction }) {
-  const [reacted, setReacted] = useState(false);
+export function ReactionButton({ entityId, reaction, details }) {
+  const [reacted, setReacted] = useState(details.reacted);
+  const [count, setCount] = useState(details.count);
+
   const onClick = async () => {
     const response = await fetch("/api/reactions", {
       method: "POST",
@@ -31,9 +33,14 @@ export function ReactionButton({ entityId, reaction }) {
     });
     const body = await response.json();
     setReacted(body.result);
+    if (body.result) {
+      setCount((previousCount) => previousCount + 1);
+    } else {
+      setCount((previousCount) => previousCount - 1);
+    }
   };
   return (
-    <div onClick={onClick}>
+    <div onClick={onClick} className="icon-link">
       <span
         className="material-symbols-outlined action"
         style={
@@ -47,6 +54,7 @@ export function ReactionButton({ entityId, reaction }) {
       >
         {reactions[reaction].icon}
       </span>
+      {count}
     </div>
   );
 }

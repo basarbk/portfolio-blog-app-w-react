@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArticleInfo } from "../../ArticleInfo";
 import { AppImage } from "../../AppImage";
 import { ReactionButton } from "../../ReactionButton";
-
+import { AVAILABLE_REACTIONS } from "../../../shared/constant";
 export function ArticleCard({ article }) {
   return (
     <div className="card mb-3">
@@ -26,8 +26,17 @@ export function ArticleCard({ article }) {
             >
               {article.title}
             </Link>
-            <div>
-              <ReactionButton entityId={article.id} reaction="readingList" />
+            <div className="d-flex gap-2">
+              {AVAILABLE_REACTIONS.map((reaction) => {
+                return (
+                  <ReactionButton
+                    key={reaction}
+                    entityId={article.id}
+                    reaction={reaction}
+                    details={article.reactions[reaction]}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
