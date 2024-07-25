@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
-import { Logout } from "./components/Logout";
 import { User } from "./components/User";
 
 export function NavBar() {
@@ -20,7 +19,6 @@ export function NavBar() {
                   Post Article
                 </Link>
               </li>
-              <Logout />
               <User />
             </>
           )}

@@ -65,3 +65,11 @@ $input-border-color: var(--bs-black);
 p.markdown img {
     max-width: 100%;
 }
+
+.navbar .dropdown-item {
+    &:hover {
+        text-shadow: unset;
+        transform: unset;
+        cursor: pointer;
+    }
+}

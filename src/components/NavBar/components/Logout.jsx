@@ -11,11 +11,5 @@ export function Logout() {
     }
   };
 
-  return (
-    <li className="nav-item">
-      <span className="nav-link active" onClick={onClickLogout}>
-        Logout
-      </span>
-    </li>
-  );
+  return <span onClick={onClickLogout}>Logout</span>;
 }
