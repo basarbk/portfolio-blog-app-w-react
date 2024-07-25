@@ -73,3 +73,12 @@ p.markdown img {
         cursor: pointer;
     }
 }
+
+.material-symbols-outlined.action {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+        text-shadow: 2px 2px darkgray;
+        transform: translate(-2px, -2px);
+    }
+}

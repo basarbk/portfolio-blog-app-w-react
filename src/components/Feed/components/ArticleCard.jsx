@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArticleInfo } from "../../ArticleInfo";
 import { AppImage } from "../../AppImage";
+import { ReactionButton } from "../../ReactionButton";
 
 export function ArticleCard({ article }) {
   return (
@@ -25,6 +26,9 @@ export function ArticleCard({ article }) {
             >
               {article.title}
             </Link>
+            <div>
+              <ReactionButton entityId={article.id} reaction="readingList" />
+            </div>
           </div>
         </div>
       </div>
